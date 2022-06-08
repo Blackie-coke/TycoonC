@@ -1,0 +1,233 @@
+
+
+local Config = {
+    WindowName = "Mining Tycoon Revival",
+	Color = Color3.fromRGB(255,128,64),
+	Keybind = Enum.KeyCode.LeftAlt
+}
+
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/AlexR32/Roblox/main/BracketV3.lua"))()
+local Window = Library:CreateWindow(Config, game:GetService("CoreGui"))
+
+local Tab1 = Window:CreateTab("Player")
+local Tab2 = Window:CreateTab("Misc")
+local Tab3 = Window:CreateTab("UI Settings")
+
+local Section1 = Tab1:CreateSection("Player")
+local Section2 = Tab1:CreateSection("Second Section")
+local Section5 = Tab2:CreateSection("Misc")
+local Section3 = Tab3:CreateSection("Menu")
+local Section4 = Tab3:CreateSection("Background")
+local Section6 = Tab3:CreateSection("Credit")
+------------- Button ------------------
+Section5:CreateButton("Destroy Gui", function()
+    for i,v in pairs(game.CoreGui:GetDescendants()) do
+    
+if v:IsA("Frame") and v.Name == "Topbar" then
+    
+v.Parent.Parent:Destroy()
+    
+end
+    
+end
+end)
+----------------------
+
+----------- next part------------
+Section5:CreateButton("Nothing", function()
+
+end)
+----- next part ---------
+Section1:CreateButton("Claim Tycoon", function()
+    for i,v in pairs(workspace: GetDescendants()) do ---- take all the parts from workspace
+        if v.Name == "Head" and v.Parent.Name == "Claim" and v.Parent ~= nil then
+        local args = {[1] = v}
+        game:GetService("ReplicatedStorage").Tycoon.ButtonClicked:FireServer(unpack(args))
+        end
+        end
+        end)
+        
+---------- next part -----------
+Section1:CreateButton("Tp ores", function()
+
+    local ores = game:GetService("Workspace").TycoonE.Ores:GetChildren()
+    for i, child in ipairs(ores) do
+        child.CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
+     end
+    end)
+
+
+----------- next part ----------
+Section1:CreateButton("Support", function()    
+    for i,v in pairs(workspace: GetDescendants()) do
+        if v.Name == "Head" and v.Parent.Name == "Support" and v.Parent ~= nil then  
+            local args = {[1] = v}
+            game:GetService("ReplicatedStorage").Tycoon.ButtonClicked:FireServer(unpack(args))
+        end
+        end
+        end)
+-------- next part --------
+    Section1:CreateButton("Explode", function()
+        for i,v in pairs(workspace: GetDescendants()) do
+            if v.Name == "Head" and v.Parent.Name == "Explode" and v.Parent ~= nil then
+            local args = {[1] = v}
+            game:GetService("ReplicatedStorage").Tycoon.ButtonClicked:FireServer(unpack(args))
+            end
+            end
+            end)
+----------- next part ----------
+
+------------- Slider
+Section1:CreateSlider("JumpPower", 50,255,nil,true, function(Value)
+	game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid").JumpPower = tonumber (Value)
+end)
+
+Section1:CreateSlider("WalkSpeed", 16,255,nil,true, function(Value)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = tonumber(Value)
+end)
+------------- DropDown
+local tpplaces; 
+
+Section2:CreateDropdown("Teleport", {"2nd Base","Option 2","Option 3"}, function(V)
+	tpplaces = V;
+    print(V)
+end)
+
+Section2:CreateButton("Teleport", function()
+    if tpplaces then
+    Teleport(tpplaces)
+end
+end)
+
+------------- Label
+Section6:CreateLabel("Made by Bulan")
+Section6:CreateLabel("1nd Super Big Helper by Hiix")
+Section6:CreateLabel("2nd Helper by MrBirdz")
+Section6:CreateLabel("Ui by AlexR32")
+Section6:CreateLabel("Gulian")
+----------
+
+
+local Colorpicker1 = Section1:CreateColorpicker("Colorpicker 1", function(Color)
+	print(Color)
+end)
+
+Colorpicker1:UpdateColor(Color3.fromRGB(255,0,0))
+
+--------------------------------------------------------------------------------------------
+local Button2 = Section2:CreateButton("Button 2\nMultiline", function()
+	print("Click Button 2")
+end)
+
+-------------
+
+local Toggle2 = Section2:CreateToggle("Toggle 2\nMultiline", nil, function(State)
+	print(State)
+end)
+
+Toggle2:CreateKeybind("U", function(Key)
+	print(Key)
+end)
+-------------
+local Slider2 = Section2:CreateSlider("Slider 2\nMultiline", 0,100,nil,false, function(Value)
+	print(Value)
+end)
+
+Slider2:SetValue(25)
+-------------
+local Dropdown2 = Section2:CreateDropdown("Dropdown 2\nMultiline", {"Option 4","Option 5","Option 6"}, function(String)
+	print(String)
+end)
+
+Dropdown2:SetOption("Option 6")
+-------------
+local Colorpicker2 = Section2:CreateColorpicker("Colorpicker 2\nMultiline", function(Color)
+	print(Color)
+end)
+
+Colorpicker2:UpdateColor(Color3.fromRGB(0,0,255))
+-------------
+local Toggle3 = Section3:CreateToggle("UI Toggle", nil, function(State)
+	Window:Toggle(State)
+end)
+Toggle3:CreateKeybind(tostring(Config.Keybind):gsub("Enum.KeyCode.", ""), function(Key)
+	Config.Keybind = Enum.KeyCode[Key]
+end)
+Toggle3:SetState(true)
+-------------
+local Colorpicker3 = Section3:CreateColorpicker("UI Color", function(Color)
+	Window:ChangeColor(Color)
+end)
+Colorpicker3:UpdateColor(Config.Color)
+
+
+
+-- credits to jan for patterns
+local Dropdown3 = Section4:CreateDropdown("Image", {"Default","Hearts","Abstract","Hexagon","Circles","Lace With Flowers","Floral"}, function(Name)
+	if Name == "Default" then
+		Window:SetBackground("2151741365")
+	elseif Name == "Hearts" then
+		Window:SetBackground("6073763717")
+	elseif Name == "Abstract" then
+		Window:SetBackground("6073743871")
+	elseif Name == "Hexagon" then
+		Window:SetBackground("6073628839")
+	elseif Name == "Circles" then
+		Window:SetBackground("6071579801")
+	elseif Name == "Lace With Flowers" then
+		Window:SetBackground("6071575925")
+	elseif Name == "Floral" then
+		Window:SetBackground("5553946656")
+	end
+end)
+Dropdown3:SetOption("Default")
+
+local Colorpicker4 = Section4:CreateColorpicker("Color", function(Color)
+	Window:SetBackgroundColor(Color)
+end)
+Colorpicker4:UpdateColor(Color3.new(1,1,1))
+
+local Slider3 = Section4:CreateSlider("Transparency",0,1,nil,false, function(Value)
+	Window:SetBackgroundTransparency(Value)
+end)
+Slider3:SetValue(0)
+
+local Slider4 = Section4:CreateSlider("Tile Scale",0,1,nil,false, function(Value)
+	Window:SetTileScale(Value)
+end)
+Slider4:SetValue(0.5)
+
+------- WS bypass, functions
+
+local gmt = getrawmetatable(game)
+local oi = gmt.__index
+setreadonly(gmt,false)
+
+gmt.__index = newcclosure(function(Self,Key)
+    if tostring(Self) == "Humanoid" and tostring(Key) == "WalkSpeed" then
+        return game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed
+    end
+    return oi(Self,Key)
+end)
+game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed = 16
+print("bypass work")
+------- JP bypass
+
+local gmt = getrawmetatable(game)
+local oi = gmt.__index
+setreadonly(gmt,false)
+
+gmt.__index = newcclosure(function(Self,Key)
+    if tostring(Self) == "Humanoid" and tostring(Key) == "JumpPower" then
+        return game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid").JumpPower
+    end
+    return oi(Self,Key)
+end)
+game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid").JumpPower = 50
+
+--function tpplaces()
+--    if game:service("Workspace").TycoonE:Refinery(player).Head then
+--        Teleport(game:service("Workspace").TycoonE:Refinery(player).Head.Teleport.Cframe)
+ --   end
+--end
